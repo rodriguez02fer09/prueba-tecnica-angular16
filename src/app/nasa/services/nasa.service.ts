@@ -1,23 +1,20 @@
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http'
 import {Injectable} from '@angular/core'
-import {Neo} from '../interfaces/nasa.interfaces'
-import {catchError, throwError} from 'rxjs'
-
-interface Apod {}
+import {Neo, Apod, CmeEvent} from '../interfaces/nasa.interfaces'
 
 @Injectable({
   providedIn: 'root',
 })
 export class NasaService {
-  private _dates: any[] = []
   private _apodObj: any
+  private _neos: any[] = []
   private _apiKey: string = 'LZ4zl3U03iPqY14cRyc4bpK5eq0LnUIswS7B1SrE'
-  private _api: string = 'https://api.nasa.gov/planetary'
+  private _api: string = 'https://api.nasa.gov'
 
   constructor(private http: HttpClient) {}
 
-  get dates() {
-    return [...this._dates]
+  get neos() {
+    return [...this._neos]
   }
 
   get apod() {
@@ -52,11 +49,11 @@ export class NasaService {
     const headers = new HttpHeaders().set('Accept', 'application/json')
 
     return this.http
-      .get<Apod>(`${this._api}/apod`, {params, headers})
+      .get<Apod>(`${this._api}/planetary/apod`, {params, headers})
       .subscribe({
-        next: a => (this._apodObj = a),
+        next: result => (this._apodObj = result),
         error: error => {
-          console.log('get error apod')
+          console.log(`get error apod ${error}`)
         },
       })
   }
@@ -66,21 +63,31 @@ export class NasaService {
    * @param date Fecha seleccionada en el input date
    */
   buscarNeo(date: string) {
-    const url = 'https://api.nasa.gov/neo/rest/v1/feed'
-
     const params = new HttpParams()
-      .set('api_key', 'LZ4zl3U03iPqY14cRyc4bpK5eq0LnUIswS7B1SrE')
+      .set('api_key', this._apiKey)
       .set('start_date', date)
       .set('end_date', date)
 
-    return this.http.get<any>(url, {params}).subscribe({
-      next: respuesta => {
-        this._dates = respuesta.near_earth_objects[date]
-        console.log('NEOs encontrados:', this._dates)
-      },
-      error: err => {
-        console.error('Error en petición NEOWS:', err)
-      },
-    })
+    return this.http
+      .get<Neo>(`${this._api}/neo/rest/v1/feed`, {params})
+      .subscribe({
+        next: respuesta => {
+          this._neos = respuesta.near_earth_objects[date]
+        },
+        error: err => {
+          console.error('Error en petición NEOWS:', err)
+        },
+      })
+  }
+
+  getDonkiCme(startDate: string, endDate: string) {
+    const apiUrl = `${this._api}/DONKI/CME`
+
+    const params = new HttpParams()
+      .set('api_key', this._apiKey)
+      .set('startDate', startDate)
+      .set('endDate', endDate)
+
+    return this.http.get<CmeEvent[]>(apiUrl, {params})
   }
 }

@@ -1,0 +1,176 @@
+<div class="donki">
+  <h1 class="title">DONKI</h1>
+
+  <section class="filters">
+    <label>
+      Fecha inicio:
+      <input type="date" [(ngModel)]="startDate" />
+    </label>
+
+    <label>
+      Fecha fin:
+      <input type="date" [(ngModel)]="endDate" />
+    </label>
+
+    <button class="btn" (click)="loadCME()">Buscar</button>
+  </section>
+
+  <section *ngIf="cmes?.length" class="results">
+    <h2 class="subtitle">Resultados ({{ cmes.length }})</h2>
+
+    <div class="card" *ngFor="let item of cmes">
+      <header class="card__header">
+        <div class="id">
+          ID: <strong>{{ item.activityID }}</strong>
+        </div>
+        <div class="meta">
+          <span><strong>Catálogo:</strong> {{ item.catalog || '—' }}</span>
+          <span><strong>Versión:</strong> {{ item.versionId ?? '—' }}</span>
+        </div>
+      </header>
+
+      <div class="grid">
+        <div class="grid__item">
+          <div class="row">
+            <span class="label">Inicio:</span>
+            <span>{{
+              item.startTime | date : 'yyyy-MM-dd HH:mm:ss' : 'UTC'
+            }}</span>
+          </div>
+          <div class="row">
+            <span class="label">Fuente:</span>
+            <span>{{ item.sourceLocation || '—' }}</span>
+          </div>
+          <div class="row">
+            <span class="label">Región activa:</span>
+            <span>{{ item.activeRegionNum ?? '—' }}</span>
+          </div>
+          <div class="row">
+            <span class="label">Enlace:</span>
+            <a class="link" [href]="item.link" target="_blank" rel="noopener"
+              >Ver detalle</a
+            >
+          </div>
+          <div class="row">
+            <span class="label">Enviado:</span>
+            <span>{{
+              item.submissionTime | date : 'yyyy-MM-dd HH:mm:ss' : 'UTC'
+            }}</span>
+          </div>
+        </div>
+
+        <div class="grid__item">
+          <div class="block">
+            <div class="block__title">Instrumentos</div>
+            <ul
+              class="list"
+              *ngIf="item.instruments?.length; else noInstruments"
+            >
+              <li *ngFor="let inst of item.instruments">
+                {{ inst.displayName || '—' }}
+              </li>
+            </ul>
+            <ng-template #noInstruments>—</ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block__title">Nota</div>
+        <p class="note">{{ item.note || '—' }}</p>
+      </div>
+
+      <div class="block">
+        <div class="block__title">Análisis (cmeAnalyses)</div>
+
+        <div *ngIf="item.cmeAnalyses?.length; else noAnalyses">
+          <div class="analysis" *ngFor="let a of item.cmeAnalyses">
+            <div class="row">
+              <span class="label">Más preciso:</span>
+              <span>{{ a.isMostAccurate ? 'Sí' : 'No' }}</span>
+            </div>
+            <div class="row">
+              <span class="label">t@21.5 R☉:</span>
+              <span>{{
+                a.time21_5 | date : 'yyyy-MM-dd HH:mm:ss' : 'UTC'
+              }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Lat / Lon:</span>
+              <span>{{ a.latitude ?? '—' }} / {{ a.longitude ?? '—' }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Half Angle:</span>
+              <span>{{ a.halfAngle ?? '—' }}°</span>
+            </div>
+            <div class="row">
+              <span class="label">Velocidad:</span>
+              <span>{{ a.speed ?? '—' }} km/s</span>
+            </div>
+            <div class="row">
+              <span class="label">Tipo:</span>
+              <span>{{ a.type || '—' }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Feature Code:</span>
+              <span>{{ a.featureCode || '—' }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Imagen:</span>
+              <span>{{ a.imageType || '—' }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Técnica:</span>
+              <span>{{ a.measurementTechnique || '—' }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Nivel de datos:</span>
+              <span>{{ a.levelOfData ?? '—' }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Vel. medida a altura:</span>
+              <span>{{ a.speedMeasuredAtHeight ?? '—' }} R☉</span>
+            </div>
+            <div class="row">
+              <span class="label">Subido:</span>
+              <span>{{
+                a.submissionTime | date : 'yyyy-MM-dd HH:mm:ss' : 'UTC'
+              }}</span>
+            </div>
+            <div class="row">
+              <span class="label">Link análisis:</span>
+              <a class="link" [href]="a.link" target="_blank" rel="noopener"
+                >Abrir</a
+              >
+            </div>
+            <div class="row">
+              <span class="label">ENLIL Runs:</span>
+              <span>{{ a.enlilList?.length || 0 }}</span>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #noAnalyses>—</ng-template>
+      </div>
+
+      <footer class="card__footer">
+        <div class="row">
+          <span class="label">Eventos vinculados:</span>
+          <span>{{
+            item.linkedEvents ? (item.linkedEvents | json) : '—'
+          }}</span>
+        </div>
+        <div class="row">
+          <span class="label">Notificaciones enviadas:</span>
+          <span>{{
+            item.sentNotifications ? (item.sentNotifications | json) : '—'
+          }}</span>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <section *ngIf="cmes && !cmes.length" class="empty">
+    <p>No hay resultados para el rango seleccionado.</p>
+  </section>
+</div>

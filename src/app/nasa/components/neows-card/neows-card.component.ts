@@ -9,7 +9,7 @@ import {NasaService} from '../../services/nasa.service'
 export class NeowsCardComponent {
   constructor(private nasaService: NasaService) {}
 
-  get dates() {
-    return this.nasaService.dates
+  get neos() {
+    return this.nasaService.neos
   }
 }
