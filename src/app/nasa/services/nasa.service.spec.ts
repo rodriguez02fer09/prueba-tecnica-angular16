@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing'
 
-import { NasaService } from './nasa.service';
+import {NasaService} from './nasa.service'
 
 describe('NasaService', () => {
-  let service: NasaService;
+  let service: NasaService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(NasaService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(NasaService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})
