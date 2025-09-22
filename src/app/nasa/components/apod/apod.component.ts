@@ -1,23 +1,19 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { NasaService } from '../../services/nasa.service';
+import {Component, AfterViewInit, OnInit} from '@angular/core'
+import {NasaService} from '../../services/nasa.service'
 
 @Component({
   selector: 'app-apod',
   templateUrl: './apod.component.html',
-  styleUrls: ['./apod.component.css']
+  styleUrls: ['./apod.component.css'],
 })
 export class ApodComponent {
-
-  constructor(private nasaService: NasaService) {
-
-  }
+  constructor(private nasaService: NasaService) {}
 
   ngOnInit() {
-    this.nasaService.getApod();
+    this.nasaService.getApod()
   }
 
-  get apod () {
-    return this.nasaService.apod;
+  get apod() {
+    return this.nasaService.apod
   }
-
 }
