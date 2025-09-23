@@ -6,11 +6,11 @@ la Tierra (NEO) y eventos de clima espacial (DONKI).
 
 ## 📋 Descripción del Proyecto
 
-Este proyecto fue desarrollado como prueba técnica para desarrollador Junior en
-ADN ERP. Utiliza la API pública de la NASA (https://api.nasa.gov/) para obtener
-y mostrar información astronómica de manera interactiva.
+Este proyecto fue desarrollado como prueba técnica para desarrollador Junior.
+Utiliza la API pública de la NASA (https://api.nasa.gov/) para obtener y mostrar
+información astronómica de manera interactiva.
 
-**Desarrollado por:** Carlos Andrés Franco Restrepo - cf.dev13@hotmail.com
+**Desarrollada por:**Fernanda Rodriguez - fernandarpy@gmail.com
 
 ## 🏗️ Estructura del Proyecto
 
@@ -83,12 +83,6 @@ src/
 # Servidor de desarrollo
 npm start
 
-# Construir para producción
-npm run build
-
-# Construir en modo watch (desarrollo)
-npm run watch
-
 
 # Generar componentes (usando Angular CLI)
 ng generate component nombre-componente
@@ -159,9 +153,32 @@ El proyecto utiliza:
 
 ## 📚 APIs Utilizadas
 
-- **APOD API**: Astronomy Picture of the Day
-- **NEO API**: Near Earth Objects Web Service
-- **DONKI API**: Space Weather Database Of Notifications, Knowledge, Information
+#### APOD — Astronomy Picture of the Day
+
+Breve: muestra la imagen/video astronómico del día con título, fecha y
+explicación. <br>
+<img src="https://github.com/user-attachments/assets/50a597df-76f8-46c7-a3dc-b9db1bb792e1" alt="APOD — captura de pantalla" width="900" />
+
+---
+
+#### NEO — Near Earth Objects Web Service
+
+Breve: lista NEOs para una fecha concreta (mismo `start_date` y `end_date`), con
+indicadores de peligrosidad. <br>
+<img src="https://github.com/user-attachments/assets/acd80b39-b903-473c-933b-95c3648cc4c6" alt="NEO — captura de pantalla" width="900" />
+
+---
+
+#### DONKI/CME — Space Weather Events
+
+Breve: consulta eyecciones de masa coronal (CME) entre `startDate` y `endDate`,
+mostrando análisis y enlaces. <br>
+<img src="https://github.com/user-attachments/assets/ef9c2b4a-94d0-4f2a-bd67-f78b443b83ac" alt="DONKI/CME — captura de pantalla" width="900" />
+
+---
+
+-\*Dockerfile\*\*: : se creo el Dockerfile para ejecutar la aplicacion en el
+contenedor
 
 ## 🚀 Despliegue en Producción
 
@@ -191,7 +208,7 @@ NASA_API_KEY=tu_api_key_aqui
 
 ## 📄 Licencia
 
-Este proyecto es una prueba técnica desarrollada para ADN ERP.
+Este proyecto es una prueba técnica desarrollada.
 
 ---
 
