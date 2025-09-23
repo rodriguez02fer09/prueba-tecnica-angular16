@@ -6,11 +6,11 @@ la Tierra (NEO) y eventos de clima espacial (DONKI).
 
 ## 📋 Descripción del Proyecto
 
-Este proyecto fue desarrollado como prueba técnica para desarrollador Junior en
-ADN ERP. Utiliza la API pública de la NASA (https://api.nasa.gov/) para obtener
-y mostrar información astronómica de manera interactiva.
+Este proyecto fue desarrollado como prueba técnica para desarrollador Junior.
+Utiliza la API pública de la NASA (https://api.nasa.gov/) para obtener y mostrar
+información astronómica de manera interactiva.
 
-**Desarrollado por:** Carlos Andrés Franco Restrepo - cf.dev13@hotmail.com
+**Desarrollada por:**Fernanda Rodriguez - fernandarpy@gmail.com
 
 ## 🏗️ Estructura del Proyecto
 
@@ -82,12 +82,6 @@ src/
 ```bash
 # Servidor de desarrollo
 npm start
-
-# Construir para producción
-npm run build
-
-# Construir en modo watch (desarrollo)
-npm run watch
 
 
 # Generar componentes (usando Angular CLI)
@@ -191,7 +185,7 @@ NASA_API_KEY=tu_api_key_aqui
 
 ## 📄 Licencia
 
-Este proyecto es una prueba técnica desarrollada para ADN ERP.
+Este proyecto es una prueba técnica desarrollada.
 
 ---
 
